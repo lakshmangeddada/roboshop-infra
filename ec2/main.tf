@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 data "aws_ami" "ami" {
   most_recent = true
-  name_regex  = "devops-practice-with-ansible"
+  name_regex  = "devops-practice-ansible"
   owners      = [data.aws_caller_identity.current.account_id]
 }
 
@@ -26,7 +26,7 @@ resource "null_resource" "provisioner" {
     }
 
     inline = [
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb71/roboshop-ansible roboshop.yml -e role_name=${var.component}"
+      "ansible-pull -i localhost, -U https://github.com/lakshmangeddada/ansible-roboshop roboshop.yml -e role_name=${var.component}"
     ]
 
   }
@@ -58,7 +58,7 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_route53_record" "record" {
-  zone_id = "Z103214126L48SQW30RSR"
+  zone_id = "Z01585422FZM6ALUWCNYT"
   name    = "${var.component}-dev.devopsb71.online"
   type    = "A"
   ttl     = 30
